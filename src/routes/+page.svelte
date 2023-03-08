@@ -1,24 +1,20 @@
 <script lang="ts">
 
+	export const ssr = false;
+
+
 	import Header from '$lib/Header.svelte';
   import PlanCards from '$lib/PlanCards.svelte';
 	import { onMount } from 'svelte';
 
 
-	onMount(async() => {
-		navigator.getInstalledRelatedApps().then(app => {
-			console.log(app)
-		}).catch(err => {
-			console.log(err)
-		})
-		if ("getInstalledRelatedApps" in navigator) {
-
-			// const relatedApps: any = await navigator.getInstalledRelatedApps();
-			// relatedApps.forEach((app: any) => {
-			// 	console.log(app.id, app.platform, app.url);
-			// });
-		}
-	});
+	// onMount(async () => {
+	// 	navigator.getInstalledRelatedApps().then(app => {
+	// 		console.log(app)
+	// 	}).catch(err => {
+	// 		console.log(err)
+	// 	})
+	// });
 	
 	const name = "Lukas";
 

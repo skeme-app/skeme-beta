@@ -5,6 +5,9 @@ import type { UserConfig } from 'vite';
 const config: UserConfig = {
 	plugins: [sveltekit()],
 	preprocess: vitePreprocess(),
+	optimizeDeps: {
+		exclude: ["sswr"],
+	},
 };
 
 export default config;

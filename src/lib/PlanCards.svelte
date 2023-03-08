@@ -1,8 +1,36 @@
 <script lang="ts">
-  import dayjs from "dayjs";
+  import {currentUser, pb} from "$lib/pocketbase";
+  import {onMount, onDestroy} from "svelte";
+  import dayjs from "dayjs"; 
   import "dayjs/locale/de";
 
   dayjs.locale("de")
+  
+  const today: dayjs.Dayjs = dayjs();
+
+  let cardsData = [];
+  let unsubscribe: () => void;
+
+  onMount(async () => {
+    const results = await pb.collection("plans").getList(1, 2, { sort: "created" });
+    cardsData = results.items;
+
+    console.log(cardsData);
+
+    unsubscribe = await pb.collection("plans").subscribe("*", async ({ action, record }) => {
+      if (action === "create") {
+        cardsData = [...cardsData, record];
+      }
+      if (action === "delete") {
+        cardsData = cardsData.filter((m) => m.id !== record.id);
+      }
+    });
+    console.log(cardsData)
+  });
+
+  onDestroy(() => {
+    unsubscribe?.();
+  });
 
   const sampleData = [{
     data: "",
@@ -14,8 +42,7 @@
     destinationDate: dayjs("03/09/2023", "MM/DD/YYYY"),
   }]
 
-  const today: dayjs.Dayjs = dayjs();
-
+  // console.log(cardsData)
 </script>
 
 {#each sampleData as data}
