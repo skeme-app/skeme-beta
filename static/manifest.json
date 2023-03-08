@@ -1,9 +1,9 @@
 {
-  "name": "example-name",
-  "short_name": "example",
-	"theme_color": "#1e88e5",
-  "background_color": "#3E82F7",
-  "display": "minimal-ui",
+  "name": "skeme-app",
+  "short_name": "skeme",
+	"theme_color": "#eb5a23",
+  "background_color": "#ffffff",
+  "display": "standalone",
   "start_url": "/",
   "icons": [
 		{
@@ -15,5 +15,9 @@
 			"sizes": "512x512",
 			"purpose": "maskable"
 		}
-	]
+	],
+	"related_applications": [{
+    "platform": "webapp",
+    "url": "http://localhost:5173/manifest.json"
+  }]
 }
